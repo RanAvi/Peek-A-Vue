@@ -5,13 +5,11 @@
         <div 
         v-if="visible" 
         class="card-face is-front">
-             {{ value }}
+             {{ value }} -{{matched}}
         </div>
         <div v-else class="card-face is-back">
             back
         </div>
-       
-
     </div>
 </template>
 
@@ -22,7 +20,11 @@ const emit= defineEmits(['selectCardClicked'])
 
 
 const handleSelectedCard = () =>{
-    emit('selectCardClicked',props.position)
+    emit('selectCardClicked',({
+        position:props.position,
+        faceValue:props.value,
+        matched:props.matched
+    }))
 
 }
 
@@ -40,6 +42,10 @@ const props=defineProps({
     position:{
         type:Number,
         required:true
+    },
+    matched:{
+        type:Boolean,
+        default:false
     }
 
 });
