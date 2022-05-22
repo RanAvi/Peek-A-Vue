@@ -5,11 +5,24 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'/peekcards/',
   plugins: [vue()],
+  base:'/peek-a-vue/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  build: {
+    outDir: "dist",
+    sourcemap: true,
+    emptyOutDir: true,
+    rollupOptions: {
+        output: {
+            entryFileNames: "[name].js",
+            chunkFileNames: "[name].js",
+            assetFileNames: "assets/[name].[ext]"
+        }
+    }
+
+}
 })
